@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"

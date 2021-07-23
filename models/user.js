@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   User.init(
     {
       username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(36),
         // nullible by default, must specify:
         allowNull: false,
         unique: true,
@@ -25,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
+      password: {
+        // limit chars w (<limit num>), default is 255 chars
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      imageUrl: DataTypes.STRING,
     },
     // OPTIONS FOR THIS MODEL:
     {
