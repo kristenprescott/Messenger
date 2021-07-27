@@ -74,10 +74,9 @@ module.exports = {
         return user;
       } catch (err) {
         console.log(err);
-        //
+        // Check for username/email uniqueness:
         if (err.name === "SequelizeUniqueConstraintError") {
           /*
-          SQL errors arr:
             errors: [
               ValidationErrorItem {
                 message: 'users.username must be unique',
@@ -95,6 +94,25 @@ module.exports = {
           err.errors.forEach(
             (e) => (errors[e.path] = `${e.value} is already taken.`)
           );
+          // Check for valid email:
+        } else if (err.name === "SequelizeValidationError") {
+          /*
+            errors: [
+               ValidationErrorItem {
+                  message: 'Invalid email address.',
+                  type: 'Validation error',
+                  path: 'email',
+                  value: 'jmack@email',
+                  origin: 'FUNCTION',
+                  instance: [User],
+                  validatorKey: 'isEmail',
+                  validatorName: 'isEmail',
+                  validatorArgs: [Array],
+                  original: [Error]
+                }
+              ]
+          */
+          err.errors.forEach((e) => (errors[e.path] = e.message));
         }
         throw new UserInputError("Bad input: ", { errors });
       }
