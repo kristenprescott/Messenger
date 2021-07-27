@@ -1,6 +1,5 @@
 const bcrypt = require("bcryptjs");
 const { UserInputError, AuthenticationError } = require("apollo-server");
-// https://www.npmjs.com/package/jsonwebtoken
 const jwt = require("jsonwebtoken");
 
 const { User } = require("../models");
@@ -8,13 +7,33 @@ const { JWT_SECRET } = require("../config/env.json");
 
 module.exports = {
   Query: {
-    getUsers: async () => {
+    getUsers: async (_, __, context) => {
       try {
+        // Authorization:
+        let user;
+        // Check for auth header:
+        if (context.req && context.req.headers.authorization) {
+          // Remove 'Bearer ' from header:
+          const token = context.req.headers.authorization.split("Bearer ")[1];
+          jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+            // Check for errors:
+            if (err) {
+              throw new AuthenticationError("Unauthenticated.");
+            }
+            user = decodedToken;
+
+            console.log("user: ", user);
+            // user:  { username: 'aello', iat: 1627408215, exp: 1627411815 }
+            //    iat = issued at, exp = expires at
+          });
+        }
+
         const users = await User.findAll();
 
         return users;
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
+        throw err;
       }
     },
     login: async (_, args) => {
