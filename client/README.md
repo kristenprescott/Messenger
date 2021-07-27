@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Instant Messenger
 
-## Available Scripts
+[DEMO]()
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+## Key Features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<samp>
+    <pre align="left">
+        <a href="#key-features">        • Key Features</a></br>
+        <a href="#installation">        • Installation</a></br>
+        <a href="#download">        • Download</a></br>
+        <a href="#dependencies">        • Dependencies</a></br>
+        <a href="#related">        • Related</a></br>
+    </pre>
+</samp>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+</div>
 
-### `yarn test`
+<div align="center">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<samp>
+Ne equidem definiebas mel, vel cu adhuc pertinacia. Sit luptatum honestatis at, populo lucilius his et, vel ex fuisset lobortis. Graeco tractatos in vel, an ferri habemus his, in soluta omnesque quaestio usu. Qui quod ignota malorum id, vis et wisi vidit aperiri, ad pro meis referrentur.
+</br></br>
+Cu graeco appetere eam, omnium argumentum ne mel. Nec ea mollis latine commune, ad oblique singulis urbanitas pri. Usu at deserunt atomorum, an vide noster lucilius vel, mea ea nonumes reformidans. In eum nisl voluptatum, mei aperiam inimicus periculis an. Nec soleat nostrud te. Choro alterum aliquando his in.
+</samp>
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div align="center">
 
-### `yarn eject`
+## Download
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Instructions:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<samp>
+    Lorem ipsum dolor sit amet, cu vim nullam definitiones, sonet omittam nec at. Sed ut mundi prodesset. Eu libris tritani corpora vix, ex eius homero cum. Aeterno scaevola est cu, an pri dicunt integre delicata, sumo quas eligendi cu qui. Aliquam suscipit gloriatur et nec.
+</br></br>
+    Id cum tamquam iuvaret, vim ex dicta consul qualisque. Eu vivendo appetere per. In nemore laoreet quo, bonorum facilisi cu vel. At feugait praesent pri. An zril oratio sed, has porro error legimus ne, mei modo vidit at. Legimus dissentiunt in eum, suscipit antiopam incorrupte an quo.
+</samp>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+</div>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+<div align="center">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<div align="left">
 
-### Code Splitting
+    * ONE
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    * TWO
 
-### Analyzing the Bundle Size
+    * THREE
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    * FOUR
 
-### Making a Progressive Web App
+    * FIVE
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+</div>
+</div>
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##
