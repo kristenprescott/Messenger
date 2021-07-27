@@ -1,0 +1,53 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cabin:wght@400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap");
+
+/* RESETS */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Cabin", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+code {
+  font-family: "Fira Code", monospace;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
