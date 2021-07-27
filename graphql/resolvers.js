@@ -57,9 +57,11 @@ module.exports = {
           expiresIn: "1h",
         });
 
-        user.token = token;
-
-        return user;
+        return {
+          ...user.toJSON(),
+          createdAt: user.createdAt.toISOString(),
+          token,
+        };
       } catch (err) {
         console.log(err);
         throw err;
@@ -158,6 +160,7 @@ query login{
   login(username:"aello" password:"lamppost"){
     username
     email
+    createdAt
     token
   }
 }
@@ -167,10 +170,67 @@ RES:
     "login": {
       "username": "aello",
       "email": "aello@email.com",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFlbGxvIiwiaWF0IjoxNjI3NDA1MDMxLCJleHAiOjE2Mjc0OTE0MzF9.BLrMzI3xsFYiOkNBijZbsvy9QdDFQh_JrwZF62siXPo"
+      "createdAt": "2021-07-27T16:28:50.000Z",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFlbGxvIiwiaWF0IjoxNjI3NDA1NzU2LCJleHAiOjE2Mjc0MDkzNTZ9.f7E0yR3TxUkKTjeRz4bwn34N6sHVT2cpLGHtBu1wMoo"
     }
   }
 }
 ____________________________________________________
+query getUsers{
+  getUsers {
+    username 
+    email 
+    createdAt
+  }
+}
+RES:
+{
+  "data": {
+    "getUsers": [
+      {
+        "username": "fyrefaux420",
+        "email": "fyrefaux420@email.com",
+        "createdAt": "1627024983000"
+      },
+      {
+        "username": "daffy_duck",
+        "email": "daffy_duck@email.com",
+        "createdAt": "1627025321000"
+      },
+      {
+        "username": "laffingtaffy",
+        "email": "laffingtaffy@email.com",
+        "createdAt": "1627026014000"
+      },
+      {
+        "username": "nuSka",
+        "email": "nuska@email.com",
+        "createdAt": "1627026178000"
+      },
+      {
+        "username": "okaycorral",
+        "email": "okaycorral@email.com",
+        "createdAt": "1627401011000"
+      },
+      {
+        "username": "JMack",
+        "email": "jmack@email.com",
+        "createdAt": "1627402357000"
+      },
+      {
+        "username": "aello",
+        "email": "aello@email.com",
+        "createdAt": "1627403330000"
+      },
+      {
+        "username": "gobabygogo",
+        "email": "gobabygogo@email.com",
+        "createdAt": "1627405102000"
+      }
+    ]
+  }
+}
+____________________________________________________
+
 
 */
