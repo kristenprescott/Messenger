@@ -1,7 +1,10 @@
 const bcrypt = require("bcryptjs");
 const { UserInputError, AuthenticationError } = require("apollo-server");
+// https://www.npmjs.com/package/jsonwebtoken
+const jwt = require("jsonwebtoken");
 
 const { User } = require("../models");
+const { JWT_SECRET } = require("../config/env.json");
 
 module.exports = {
   Query: {
@@ -48,6 +51,13 @@ module.exports = {
           errors.password = "Password is incorrect.";
           throw new AuthenticationError("incorrect password", { errors });
         }
+
+        // Issue jwt/send it back:
+        const token = jwt.sign({ username }, JWT_SECRET, {
+          expiresIn: "1h",
+        });
+
+        user.token = token;
 
         return user;
       } catch (err) {
@@ -130,15 +140,37 @@ module.exports = {
 /*
 mutation register{
   register(username: "aello", email: "aello@email.com", password: "lamppost", confirmPassword: "lamppost"){
-    username email
+    username 
+    email
   }
 }
-
+RES:
+{
+  "data": {
+    "register": {
+      "username": "aello",
+      "email": "aello@email.com"
+    }
+  }
+}
+____________________________________________________
 query login{
   login(username:"aello" password:"lamppost"){
     username
     email
+    token
   }
 }
+RES:
+{
+  "data": {
+    "login": {
+      "username": "aello",
+      "email": "aello@email.com",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFlbGxvIiwiaWF0IjoxNjI3NDA1MDMxLCJleHAiOjE2Mjc0OTE0MzF9.BLrMzI3xsFYiOkNBijZbsvy9QdDFQh_JrwZF62siXPo"
+    }
+  }
+}
+____________________________________________________
 
 */
