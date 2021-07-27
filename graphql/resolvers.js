@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const { UserInputError, AuthenticationError } = require("apollo-server");
 const jwt = require("jsonwebtoken");
+// https://sequelize.org/master/manual/model-querying-basics.html#operators
+const { Op } = require("sequelize");
 
 const { User } = require("../models");
 const { JWT_SECRET } = require("../config/env.json");
@@ -21,14 +23,13 @@ module.exports = {
               throw new AuthenticationError("Unauthenticated.");
             }
             user = decodedToken;
-
-            console.log("user: ", user);
-            // user:  { username: 'aello', iat: 1627408215, exp: 1627411815 }
-            //    iat = issued at, exp = expires at
           });
         }
 
-        const users = await User.findAll();
+        const users = await User.findAll({
+          // Get all users EXCEPT currently authenticated user:
+          where: { username: { [Op.ne]: user.username } },
+        });
 
         return users;
       } catch (err) {
@@ -202,6 +203,8 @@ query getUsers{
     createdAt
   }
 }
+HEADERS:
+'Authorization': 'Bearer <token>';
 RES:
 {
   "data": {
@@ -235,11 +238,6 @@ RES:
         "username": "JMack",
         "email": "jmack@email.com",
         "createdAt": "1627402357000"
-      },
-      {
-        "username": "aello",
-        "email": "aello@email.com",
-        "createdAt": "1627403330000"
       },
       {
         "username": "gobabygogo",
