@@ -43,17 +43,17 @@ module.exports = {
           errors.confirmPassword = "Passwords must match.";
         }
 
-        // Check if username / email exists
-        const userByUsername = await User.findOne({ where: { username } });
-        const userByEmail = await User.findOne({ where: { email } });
+        // // Check if username / email exists
+        // const userByUsername = await User.findOne({ where: { username } });
+        // const userByEmail = await User.findOne({ where: { email } });
 
-        if (userByUsername) {
-          errors.username = "This username is taken.";
-        }
-        if (userByEmail) {
-          errors.email =
-            "There is already an account using that email address.";
-        }
+        // if (userByUsername) {
+        //   errors.username = "This username is taken.";
+        // }
+        // if (userByEmail) {
+        //   errors.email =
+        //     "There is already an account using that email address.";
+        // }
 
         // If the errors object is not empty, throw errors
         if (Object.keys(errors).length > 0) {
@@ -72,9 +72,31 @@ module.exports = {
 
         // Return user to client
         return user;
-      } catch (error) {
-        console.log(error);
-        throw new UserInputError("Bad input: ", { errors: error });
+      } catch (err) {
+        console.log(err);
+        //
+        if (err.name === "SequelizeUniqueConstraintError") {
+          /*
+          SQL errors arr:
+            errors: [
+              ValidationErrorItem {
+                message: 'users.username must be unique',
+                type: 'unique violation',
+                path: 'users.username',
+                value: 'okaycorral',
+                origin: 'DB',
+                instance: [User],
+                validatorKey: 'not_unique',
+                validatorName: null,
+                validatorArgs: []
+              }
+            ],
+          */
+          err.errors.forEach(
+            (e) => (errors[e.path] = `${e.value} is already taken.`)
+          );
+        }
+        throw new UserInputError("Bad input: ", { errors });
       }
     },
   },
