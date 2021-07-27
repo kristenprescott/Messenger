@@ -1,9 +1,8 @@
 const bcrypt = require("bcryptjs");
-const { UserInputError } = require("apollo-server");
+const { UserInputError, AuthenticationError } = require("apollo-server");
 
 const { User } = require("../models");
 
-// A map of functions which return data for the schema.
 module.exports = {
   Query: {
     getUsers: async () => {
@@ -15,9 +14,49 @@ module.exports = {
         console.log(error);
       }
     },
+    login: async (_, args) => {
+      const { username, password } = args;
+      const errors = {};
+
+      try {
+        // Check for empty username/password fields:
+        if (username.trim() === "") {
+          errors.username = "Username cannot be left blank.";
+        }
+        if (password === "") {
+          errors.password = "Password cannot be left blank.";
+        }
+
+        if (Object.keys(errors).length > 0) {
+          throw new UserInputError("blank user input", { errors });
+        }
+
+        const user = await User.findOne({
+          where: { username },
+        });
+
+        // Check if user exists:
+        if (!user) {
+          errors.username = "User not found.";
+          throw new UserInputError("invalid user", { errors });
+        }
+
+        // Compare password correctness:
+        const correctPassword = await bcrypt.compare(password, user.password);
+
+        if (!correctPassword) {
+          errors.password = "Password is incorrect.";
+          throw new AuthenticationError("incorrect password", { errors });
+        }
+
+        return user;
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
   },
   Mutation: {
-    // register: async (parent, args, context, info) => {
     register: async (_, args) => {
       let { username, email, password, confirmPassword } = args;
       let errors = {};
@@ -70,48 +109,16 @@ module.exports = {
           password,
         });
 
-        // Return user to client
         return user;
       } catch (err) {
         console.log(err);
         // Check for username/email uniqueness:
         if (err.name === "SequelizeUniqueConstraintError") {
-          /*
-            errors: [
-              ValidationErrorItem {
-                message: 'users.username must be unique',
-                type: 'unique violation',
-                path: 'users.username',
-                value: 'okaycorral',
-                origin: 'DB',
-                instance: [User],
-                validatorKey: 'not_unique',
-                validatorName: null,
-                validatorArgs: []
-              }
-            ],
-          */
           err.errors.forEach(
             (e) => (errors[e.path] = `${e.value} is already taken.`)
           );
           // Check for valid email:
         } else if (err.name === "SequelizeValidationError") {
-          /*
-            errors: [
-               ValidationErrorItem {
-                  message: 'Invalid email address.',
-                  type: 'Validation error',
-                  path: 'email',
-                  value: 'jmack@email',
-                  origin: 'FUNCTION',
-                  instance: [User],
-                  validatorKey: 'isEmail',
-                  validatorName: 'isEmail',
-                  validatorArgs: [Array],
-                  original: [Error]
-                }
-              ]
-          */
           err.errors.forEach((e) => (errors[e.path] = e.message));
         }
         throw new UserInputError("Bad input: ", { errors });
@@ -119,3 +126,19 @@ module.exports = {
     },
   },
 };
+
+/*
+mutation register{
+  register(username: "aello", email: "aello@email.com", password: "lamppost", confirmPassword: "lamppost"){
+    username email
+  }
+}
+
+query login{
+  login(username:"aello" password:"lamppost"){
+    username
+    email
+  }
+}
+
+*/
