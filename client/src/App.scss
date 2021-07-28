@@ -89,10 +89,24 @@ body {
   }
   .Card {
     width: 50%;
-    height: 82vh;
+    height: 80vh;
+    background: floralwhite;
     text-align: center;
     border-radius: 9px;
     box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.6);
+    hr {
+      color: darkgray;
+      margin: 2.5rem;
+    }
+  }
+  .Card:hover {
+    color: floralwhite;
+    border-top: 1px solid floralwhite;
+    border-right: 1px solid rgba(130, 130, 130, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+    border-left: 1px solid rgba(200, 200, 200, 0.75);
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.6);
   }
   .Left {
     margin: 0.5rem 0.75rem 0px 1.5rem;
@@ -175,7 +189,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10em;
+  margin-top: 6em;
   .Column {
     display: flex;
     flex-direction: column;
@@ -239,10 +253,6 @@ body {
   height: 15%;
   margin-top: 5%;
   margin: 1rem;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // text-align: center;
   border: 1px solid floralwhite;
   border-bottom: 1px solid gray;
   border-right: 1px solid darkgray;
@@ -294,6 +304,8 @@ body {
       border: 1px solid gainsboro;
       border-radius: 6px;
       padding-left: 1rem;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
     }
     .search:hover {
       border: 1px solid darkgray;
@@ -306,10 +318,20 @@ body {
     .search-btn {
       padding: 0px;
       margin: 0px;
-      height: 2.5em;
+      height: 2.8em;
       width: 6em;
+      border: 1px solid transparent;
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    }
+    .search-btn:hover {
+      background-color: rgba(0, 0, 0, 0.25);
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+    }
+    .search-btn:active {
+      background-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);
     }
   }
 }

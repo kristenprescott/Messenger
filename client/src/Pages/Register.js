@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 
+import Navbar from "../Components/Navbar";
 import Loading from "../assets/images/loading.gif";
 
 const REGISTER_USER = gql`
@@ -44,8 +45,6 @@ export default function Register(props) {
   const submitRegistrationForm = (e) => {
     e.preventDefault();
 
-    // console.log("client Registration data: ", variables);
-
     registerUser({ variables });
 
     // Clear input fields:
@@ -58,107 +57,125 @@ export default function Register(props) {
   };
 
   return (
-    <Row className="Register">
-      <Col className="Column" sm={11} md={10} lg={9}>
-        <Card className="card">
-          <h1 className="text-center ">Register</h1>
+    <>
+      <Navbar />
+      <Row className="Register">
+        <Col className="Column" sm={11} md={10} lg={9}>
+          <Card className="card">
+            <h1 className="text-center ">Register</h1>
 
-          <hr />
+            <hr />
 
-          {loading ? (
-            <img alt="loading..." src={Loading} width="25%" />
-          ) : (
-            <Form onSubmit={submitRegistrationForm}>
-              <Form.Group className="formGroup">
-                <Form.Label className={errors.username && "text-danger"}>
-                  {errors.username ?? "Username "}
-                </Form.Label>
-                <Form.Control
-                  autoComplete="new-password"
-                  type="text"
-                  value={variables.username}
-                  onChange={(e) =>
-                    setVariables({ ...variables, username: e.target.value })
-                  }
-                  className={errors.username && "is-invalid formField"}
-                />
-              </Form.Group>
+            {loading ? (
+              <img alt="loading..." src={Loading} width="25%" />
+            ) : (
+              <Form onSubmit={submitRegistrationForm}>
+                <Form.Group className="formGroup">
+                  <Form.Label
+                    className={errors.username && "text-danger"}
+                    style={{ fontSize: "1.6rem" }}
+                  >
+                    {errors.username ?? "Username "}
+                  </Form.Label>
+                  <Form.Control
+                    autoComplete="new-password"
+                    type="text"
+                    value={variables.username}
+                    onChange={(e) =>
+                      setVariables({ ...variables, username: e.target.value })
+                    }
+                    className={errors.username && "is-invalid formField"}
+                  />
+                </Form.Group>
 
-              <Form.Group className="formGroup">
-                <Form.Label className={errors.email && "text-danger"}>
-                  {errors.email ?? "Email "}
-                </Form.Label>
-                <Form.Control
-                  autoComplete="new-password"
-                  type="email"
-                  value={variables.email}
-                  onChange={(e) =>
-                    setVariables({ ...variables, email: e.target.value })
-                  }
-                  className={errors.email && "is-invalid formField"}
-                />
-              </Form.Group>
+                <Form.Group className="formGroup">
+                  <Form.Label
+                    className={errors.email && "text-danger"}
+                    style={{ fontSize: "1.6rem" }}
+                  >
+                    {errors.email ?? "Email "}
+                  </Form.Label>
+                  <Form.Control
+                    autoComplete="new-password"
+                    type="email"
+                    value={variables.email}
+                    onChange={(e) =>
+                      setVariables({ ...variables, email: e.target.value })
+                    }
+                    className={errors.email && "is-invalid formField"}
+                  />
+                </Form.Group>
 
-              <Form.Group className="formGroup">
-                <Form.Label className={errors.password && "text-danger"}>
-                  {errors.password ?? "Password "}
-                </Form.Label>
-                <Form.Control
-                  autoComplete="new-password"
-                  type="password"
-                  value={variables.password}
-                  onChange={(e) =>
-                    setVariables({ ...variables, password: e.target.value })
-                  }
-                  className={errors.password && "is-invalid formField"}
-                />
-              </Form.Group>
+                <Form.Group className="formGroup">
+                  <Form.Label
+                    className={errors.password && "text-danger"}
+                    style={{ fontSize: "1.6rem" }}
+                  >
+                    {errors.password ?? "Password "}
+                  </Form.Label>
+                  <Form.Control
+                    autoComplete="new-password"
+                    type="password"
+                    value={variables.password}
+                    onChange={(e) =>
+                      setVariables({ ...variables, password: e.target.value })
+                    }
+                    className={errors.password && "is-invalid formField"}
+                  />
+                </Form.Group>
 
-              <Form.Group className="formGroup">
-                <Form.Label className={errors.confirmPassword && "text-danger"}>
-                  {errors.confirmPassword ?? "Confirm password "}
-                </Form.Label>
-                <Form.Control
-                  autoComplete="new-password"
-                  type="password"
-                  value={variables.confirmPassword}
-                  onChange={(e) =>
-                    setVariables({
-                      ...variables,
-                      confirmPassword: e.target.value,
-                    })
-                  }
-                  className={errors.confirmPassword && "is-invalid formField"}
-                />
-              </Form.Group>
+                <Form.Group className="formGroup">
+                  <Form.Label
+                    className={errors.confirmPassword && "text-danger"}
+                    style={{ fontSize: "1.6rem" }}
+                  >
+                    {errors.confirmPassword ?? "Confirm password "}
+                  </Form.Label>
+                  <Form.Control
+                    autoComplete="new-password"
+                    type="password"
+                    value={variables.confirmPassword}
+                    onChange={(e) =>
+                      setVariables({
+                        ...variables,
+                        confirmPassword: e.target.value,
+                      })
+                    }
+                    className={errors.confirmPassword && "is-invalid formField"}
+                  />
+                </Form.Group>
 
-              <div className="d-grid btn-wrapper">
-                <Button
-                  type="submit"
-                  className="register-btn btn"
-                  variant="outline"
-                  disabled={loading}
+                <div className="d-grid btn-wrapper">
+                  <Button
+                    type="submit"
+                    className="register-btn btn"
+                    variant="outline"
+                    disabled={loading}
+                  >
+                    Submit
+                  </Button>
+                </div>
+
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "2rem",
+                    paddingTop: "0px",
+                    paddingBottom: "5rem",
+                  }}
                 >
-                  Submit
-                </Button>
-              </div>
-
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "2rem",
-                  paddingTop: "0px",
-                  paddingBottom: "5rem",
-                }}
-              >
-                <small>
-                  Already have an account? <Link to="/login">Login!</Link>
-                </small>
-              </div>
-            </Form>
-          )}
-        </Card>
-      </Col>
-    </Row>
+                  <small>
+                    Already have an account?{" "}
+                    <Link to="/login">
+                      <h1 style={{ fontSize: "3.2rem" }}>Login!</h1>
+                    </Link>
+                  </small>
+                </div>
+              </Form>
+            )}
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 }
