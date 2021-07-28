@@ -8,11 +8,15 @@ const AuthDispatchContext = createContext();
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
+      // Set token in localStorage:
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         user: action.payload,
       };
     case "LOGOUT":
+      // Remove token from localStorage:
+      localStorage.removeItem("token");
       return {
         ...state,
         user: null,

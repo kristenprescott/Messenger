@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import { gql, useLazyQuery } from "@apollo/client";
 
+import { useAuthDispatch } from "../Context/auth";
+
 import Loading from "../assets/images/loading.gif";
 
 const LOGIN_USER = gql`
@@ -25,12 +27,17 @@ export default function Login(props) {
   });
   const [errors, setErrors] = useState({});
 
+  const dispatch = useAuthDispatch();
+
   // useLazyQuery: executing queries manually.
   const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
     onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
     onCompleted(data) {
-      // Store our login token in localStorage in the browser
-      localStorage.setItem("token", data.login.token);
+      // NOW: we can set the token from inside the AuthContext instead.
+      // // Store our login token in localStorage in the browser
+      // localStorage.setItem("token", data.login.token);
+      // dispatch action now that user is logged in:
+      dispatch({ type: "LOGIN", payload: data.login });
       // Redirect to Home after login
       props.history.push("/");
     },

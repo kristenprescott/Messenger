@@ -1,74 +1,79 @@
 import { Link } from "react-router-dom";
 import { Nav, Form, FormControl, Button } from "react-bootstrap";
 
-import transLogo from "../assets/images/logo_transparent.png";
+import { useAuthDispatch } from "../Context/auth";
 
-export default function Navbar() {
+import transparentLogo from "../assets/images/logo_transparent.png";
+
+export default function Navbar({ history }) {
+  const dispatch = useAuthDispatch();
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+
+    // TODO: figure out what's up w this history here
+    // history.push("/login");
+    window.open("/", "_self");
+  };
+
   return (
     <div className="Navbar">
-      <Nav fill variant="" defaultActiveKey="/" className="Nav">
-        <Nav.Item
-          style={{
-            margin: "0px 2.5rem",
-            padding: "0px 5rem",
-            paddingRight: ".1rem",
-          }}
-        >
-          {/* <Nav.Link href="/"> */}
-          {/* <Link to="/"> */}
+      <Nav fill defaultActiveKey="/" className="Nav">
+        <Nav.Item className="NavItem">
           <img
             alt="logo"
-            src={transLogo}
+            src={transparentLogo}
             width="120px"
             height="120px"
             className="logo"
-            style={{ borderRadius: "9px", margin: "0px", padding: "0px" }}
           />
-          {/* </Link> */}
-          {/* </Nav.Link> */}
         </Nav.Item>
 
-        <Nav.Item
-          style={{
-            margin: "0px 2.5rem",
-            padding: "0px 5rem",
-            paddingLeft: ".1rem",
-          }}
-        >
-          <Nav.Link href="/">
+        <Nav.Item className="NavItem">
+          <div className="nav-link">
             <Link to="/">
-              <h3>Messenger</h3>
+              <h3>Home</h3>
             </Link>
-          </Nav.Link>
+          </div>
         </Nav.Item>
 
-        <Nav.Item style={{ margin: "0px 2.5rem", padding: "0px 5rem" }}>
-          <Nav.Link eventKey="login">
+        <Nav.Item className="NavItem">
+          <div className="nav-link">
             <Link to="/login">
               <h3>Login</h3>
             </Link>
-          </Nav.Link>
+          </div>
         </Nav.Item>
 
-        <Nav.Item style={{ margin: "0px 2.5rem", padding: "0px 5rem" }}>
-          <Nav.Link eventKey="register">
+        <Nav.Item className="NavItem">
+          <div className="nav-link" onClick={logout}>
+            <Link to="/login">
+              <h3 style={{ cursor: "pointer" }}>Logout</h3>
+            </Link>
+          </div>
+        </Nav.Item>
+
+        <Nav.Item className="NavItem">
+          <div className="nav-link">
             <Link to="/register">
               <h3>Register</h3>
             </Link>
-          </Nav.Link>
+          </div>
         </Nav.Item>
 
-        <Form className="Searchbar">
-          <FormControl
-            type="search"
-            placeholder="Search"
-            className="search"
-            aria-label="Search"
-          />
-          <Button variant="outline" className="btn search-btn">
-            Search
-          </Button>
-        </Form>
+        <Nav.Item className="NavItem">
+          <Form className="Searchbar">
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="search"
+              aria-label="Search"
+            />
+            <Button variant="outline" className="btn search-btn">
+              Search
+            </Button>
+          </Form>
+        </Nav.Item>
       </Nav>
     </div>
   );
