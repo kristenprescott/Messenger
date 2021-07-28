@@ -4,6 +4,9 @@ $liteblue: rgba(106, 190, 236, 1);
 $tomato: rgba(255, 89, 38, 1);
 $mustard: rgba(238, 164, 6, 1);
 
+$border-radius: 0;
+$paragraph-margin-bottom: 0;
+
 @import "~bootstrap/scss/bootstrap";
 
 body {
@@ -56,7 +59,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  // text-align: center;
+  div.usernames:nth-child(odd) {
+    width: 100%;
+    border: 1px solid gainsboro;
+    border-radius: 2px;
+    background: floralwhite;
+  }
+  div.usernames:nth-child(even) {
+    width: 100%;
+    border: 1px solid gainsboro;
+    border-radius: 2px;
+    background: gainsboro;
+  }
 }
 
 .Register {

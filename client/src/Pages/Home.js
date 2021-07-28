@@ -1,4 +1,4 @@
-import { Col /*, Row*/ } from "react-bootstrap";
+import { Image, Card } from "react-bootstrap";
 import { gql, useQuery } from "@apollo/client";
 
 import { useAuthDispatch } from "../Context/auth";
@@ -10,8 +10,15 @@ const GET_USERS = gql`
   query getUsers {
     getUsers {
       username
-      email
       createdAt
+      imageUrl
+      latestMessage {
+        uuid
+        from
+        to
+        content
+        createdAt
+      }
     }
   }
 `;
@@ -40,86 +47,115 @@ export default function Home({ history }) {
     <p>No one is online.</p>;
   } else if (data.getUsers.length > 0) {
     usersMarkup = data.getUsers.map((user) => (
-      <div key={user.username}>
-        <ul style={{ textAlign: "left" }}>
-          <li>{user.username}</li>
-        </ul>
+      <div
+        key={user.username}
+        className="usernames"
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          padding: ".5rem",
+        }}
+      >
+        <Image
+          alt="avatar"
+          src={user.imageUrl}
+          roundedCircle
+          className="mr-2"
+          style={{
+            width: 50,
+            height: 50,
+            objectFit: "cover",
+          }}
+        />
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            margin: "0px 0px 0px 10px",
+          }}
+        >
+          <p
+            className="m-0"
+            style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
+          >
+            {user.username && user.username}
+          </p>
+          <p className="font-weight-light">
+            {user.latestMessage
+              ? user.latestMessage.content
+              : "You are now connected."}
+          </p>
+        </div>
       </div>
     ));
   }
 
   return (
-    <div className="">
+    <div className="App">
       <Navbar logout={logout} />
 
       <div className="Home">
-        <Col
-          xs={8}
-          className=""
+        <Card
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            width: "50%",
+            height: "82vh",
+            margin: ".5rem 1rem 0px 1.5rem",
+            textAlign: "center",
+            borderRadius: "9px",
+            boxShadow: "5px 5px 6px rgba(0,0,0,0.6)",
           }}
         >
+          <h3
+            style={{
+              fontSize: "3.6rem",
+              fontWeight: "bolder",
+              marginTop: "2rem",
+            }}
+          >
+            Users online:
+          </h3>
+          <br />
           <div
-            className="usernames"
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
-              border: "1px solid white",
-              margin: "3rem",
-              padding: "4rem",
+              alignItems: "flex-start",
             }}
           >
-            <h3 style={{ fontSize: "3.6rem", fontWeight: "bolder" }}>
-              Users online:
-            </h3>
-            <hr style={{ color: "floralwhite" }}></hr>
             {usersMarkup}
           </div>
-        </Col>
-        <Col
-          xs={6}
-          className="messages-container"
+        </Card>
+
+        <Card
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            width: "50%",
+            height: "82vh",
+            margin: ".5rem 1.5rem 0px 1rem",
+            textAlign: "center",
+            borderRadius: "9px",
+            boxShadow: "5px 5px 6px rgba(0,0,0,0.6)",
           }}
         >
-          <div
-            className="chat-messages"
+          <h3
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              border: "1px solid white",
-              margin: "1rem 2rem",
-              padding: "5rem 7rem",
-              textAlign: "center",
+              fontSize: "3.6rem",
+              fontWeight: "bolder",
+              marginTop: "2rem",
             }}
           >
-            <h3
-              style={{
-                fontSize: "3.6rem",
-                fontWeight: "bolder",
-                textAlign: "center",
-              }}
-            >
-              Messages:
-            </h3>
-            <hr style={{ color: "floralwhite", width: "200px" }}></hr>
+            Messages:
+          </h3>
+          <hr style={{ color: "darkgray", margin: "2.5rem" }} />
 
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
+          <div style={{ padding: "1rem 2rem", fontSize: "1.8rem" }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
           </div>
-        </Col>
+        </Card>
       </div>
     </div>
   );
