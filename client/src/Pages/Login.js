@@ -33,13 +33,10 @@ export default function Login(props) {
   const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
     onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
     onCompleted(data) {
-      // NOW: we can set the token from inside the AuthContext instead.
-      // // Store our login token in localStorage in the browser
-      // localStorage.setItem("token", data.login.token);
-      // dispatch action now that user is logged in:
       dispatch({ type: "LOGIN", payload: data.login });
-      // Redirect to Home after login
-      props.history.push("/");
+      // // Redirect to Home after login
+      // props.history.push("/");
+      console.log("LOGIN DATA: ", data.login);
     },
   });
 

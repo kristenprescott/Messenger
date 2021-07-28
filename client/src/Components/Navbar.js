@@ -12,7 +12,7 @@ export default function Navbar({ history }) {
     dispatch({ type: "LOGOUT" });
 
     // TODO: figure out what's up w this history here
-    // history.push("/login");
+    // history.push("/");
     window.open("/", "_self");
   };
 
@@ -47,7 +47,7 @@ export default function Navbar({ history }) {
 
         <Nav.Item className="NavItem">
           <div className="nav-link" onClick={logout}>
-            <Link to="/login">
+            <Link to="/">
               <h3 style={{ cursor: "pointer" }}>Logout</h3>
             </Link>
           </div>
