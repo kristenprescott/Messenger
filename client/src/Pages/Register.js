@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 
@@ -26,7 +27,7 @@ const REGISTER_USER = gql`
   }
 `;
 
-export default function Register() {
+export default function Register(props) {
   const [variables, setVariables] = useState({
     username: "",
     email: "",
@@ -36,14 +37,8 @@ export default function Register() {
   const [errors, setErrors] = useState({});
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, res) {
-      // console.log("client registerUser res: ", res);
-    },
-    onError(err) {
-      // console.log("client ERROR: ", err.graphQLErrors[0].extensions.errors);
-
-      setErrors(err.graphQLErrors[0].extensions.errors);
-    },
+    update: (_, __) => props.history.push("/login"),
+    onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
   });
 
   const submitRegistrationForm = (e) => {
@@ -142,6 +137,19 @@ export default function Register() {
                 >
                   Submit
                 </Button>
+              </div>
+
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "2rem",
+                  paddingTop: "0px",
+                  paddingBottom: "5rem",
+                }}
+              >
+                <small>
+                  Already have an account? <Link to="/login">Login!</Link>
+                </small>
               </div>
             </Form>
           )}

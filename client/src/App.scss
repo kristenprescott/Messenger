@@ -17,7 +17,12 @@ body {
 }
 
 .App {
-  // margin-top: 15%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: stretch;
 }
 
 .container {
@@ -46,84 +51,6 @@ body {
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
-.Navbar {
-  overflow: auto;
-
-  width: 99vw;
-  margin-top: 5%;
-  margin: 1rem;
-  // padding: 0.7%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid floralwhite;
-  border-bottom: 1px solid gray;
-  border-right: 1px solid darkgray;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.13);
-
-  .Nav {
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    // border: 5px solid red;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      // border: 1px solid gainsboro;
-    }
-    a:hover {
-      color: white;
-      background-color: rgba(255, 255, 255, 0.3);
-      border-radius: 9px;
-      // text-transform: uppercase;
-      padding: 0.5rem 1rem;
-    }
-  }
-  h3 {
-    font-size: 3.4rem;
-    font-weight: 700;
-  }
-  .Searchbar {
-    // margin: 0px 0.1rem;
-    display: flex;
-    justify-content: center;
-    // align-items: center;
-    .search {
-      outline: none;
-      border: 1px solid gainsboro;
-      border-radius: 6px;
-      height: 5vmin;
-
-      float: right;
-      padding: 1%;
-      padding-left: 1rem;
-      // margin-right: 16px;
-      font-size: 17px;
-
-      width: 25vmin;
-    }
-    .search:hover {
-      border: 1px solid darkgray;
-      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    }
-    .search:focus {
-      border: 1px solid dimgray;
-      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75);
-    }
-    .search-btn {
-      padding: 0px;
-      margin: 0px;
-      height: 45px;
-      height: calc(1rem +);
-      width: 75px;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-    }
-  }
-}
-
 .Home {
   margin: 0px 5rem;
   margin-top: 2.5%;
@@ -146,7 +73,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 3%;
   .Column {
     display: flex;
     justify-content: center;
@@ -155,6 +82,10 @@ body {
     input[type="email"],
     input[type="password"] {
       max-width: 50rem;
+      outline: none;
+      border: 1px solid gainsboro;
+      padding: 1rem;
+      border-radius: 6px;
     }
   }
   .card {
@@ -200,21 +131,134 @@ body {
 }
 
 .Login {
-  margin: 0px 10rem;
-  margin-top: 5%;
-  padding: 5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  .Column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input[type="text"],
+    input[type="password"] {
+      outline: none;
+      border: 1px solid gainsboro;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+  }
+  .card {
+    background-color: floralwhite;
+    border: 1px solid gainsboro;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+  }
+  h1 {
+    color: #262733;
+    font-size: 4.8rem;
+    font-weight: bold;
+    margin: 3.5rem 0px;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  hr {
+    color: dimgray;
+    margin: 1.3rem 5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+.formGroup {
+  margin: 1.3rem 5rem;
+}
+.formField {
+  outline: none;
+  border: 1px solid gainsboro;
+  padding: 1rem;
+  border-radius: 6px;
+}
+.btn-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  margin: 3rem 25rem;
+  margin-bottom: 5rem;
+}
+.login-btn {
+  color: white;
+  background-color: rgba(30, 131, 209, 1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.Navbar {
+  width: 98vw;
+  height: 13%;
+  margin-top: 5%;
+  margin: 1rem;
+  // padding: 0.7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid floralwhite;
   border-bottom: 1px solid gray;
   border-right: 1px solid darkgray;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.13);
-  h1 {
-    font-size: 6.2rem;
-    font-weight: 900;
+  .Nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      color: inherit;
+      text-decoration: none;
+      // border: 1px solid gainsboro;
+    }
+    a:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 9px;
+      // text-transform: uppercase;
+      padding: 0.5rem;
+    }
+  }
+  h3 {
+    font-size: 3.4rem;
+    font-weight: 700;
+  }
+  .Searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .search {
+      outline: none;
+      border: 1px solid gainsboro;
+      border-radius: 6px;
+      height: 5vmin;
+
+      float: right;
+      padding: 1%;
+      padding-left: 1rem;
+      // margin-right: 16px;
+      font-size: 17px;
+
+      width: 25vmin;
+    }
+    .search:hover {
+      border: 1px solid darkgray;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+    .search:focus {
+      border: 1px solid dimgray;
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75);
+    }
+    .search-btn {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      width: 75px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
   }
 }
 
@@ -222,13 +266,18 @@ body {
    ====== Medua Query for Search Box ====== 
    =========================== */
 
-// @media only screen and (min-width: 150px) and (max-width: 780px) {
-//   .Navbar {
-//     width: 95%;
-//     margin: 0 auto;
-//     .Nav {
-//       width: 95%;
-//       margin: 0 auto;
-//     }
-//   }
-// }
+@media only screen and (min-width: 150px) and (max-width: 1400px) {
+  .Navbar {
+    // margin: 0 auto;
+    .Nav {
+      // margin: 0 auto;
+    }
+    h3 {
+      font-size: 3.2rem;
+      font-weight: 600;
+    }
+    .Searchbar {
+      display: none;
+    }
+  }
+}
