@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap";
+import { Col /*, Row*/ } from "react-bootstrap";
 import { gql, useQuery } from "@apollo/client";
 
 import { useAuthDispatch } from "../Context/auth";
@@ -35,41 +35,24 @@ export default function Home({ history }) {
 
   let usersMarkup;
   if (!data || loading) {
-    // usersMarkup = <p>Loading...</p>;
     <img alt="loading..." src={Loading} width="300px" height="300px" />;
   } else if (data.getUsers.length === 0) {
     <p>No one is online.</p>;
   } else if (data.getUsers.length > 0) {
     usersMarkup = data.getUsers.map((user) => (
       <div key={user.username}>
-        <p>{user.username}</p>
+        <ul style={{ textAlign: "left" }}>
+          <li>{user.username}</li>
+        </ul>
       </div>
     ));
   }
 
   return (
     <div className="">
-      {/* <div className="half"> */}
-      {/* <Row> */}
       <Navbar logout={logout} />
-      {/* <div className=""> */}
-      {/* <h1
-            style={{
-              fontSize: "4.2rem",
-              fontWeight: "900",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Homepage
-          </h1> */}
-      {/* </div> */}
-      {/* </Row> */}
-      {/* </div> */}
 
       <div className="Home">
-        {/* <Row> */}
         <Col
           xs={8}
           className=""
@@ -82,20 +65,23 @@ export default function Home({ history }) {
           <div
             className="usernames"
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               border: "1px solid white",
-              margin: "1rem",
-              padding: "5rem",
-              textAlign: "center",
+              margin: "3rem",
+              padding: "4rem",
             }}
           >
             <h3 style={{ fontSize: "3.6rem", fontWeight: "bolder" }}>
-              Users online:{" "}
+              Users online:
             </h3>
+            <hr style={{ color: "floralwhite" }}></hr>
             {usersMarkup}
           </div>
         </Col>
         <Col
-          xs={8}
+          xs={6}
           className="messages-container"
           style={{
             display: "flex",
@@ -104,30 +90,36 @@ export default function Home({ history }) {
           }}
         >
           <div
-            className="messages"
+            className="chat-messages"
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               border: "1px solid white",
-              margin: "5rem",
-              padding: "10rem",
+              margin: "1rem 2rem",
+              padding: "5rem 7rem",
               textAlign: "center",
             }}
           >
-            <h3 style={{ fontSize: "3.6rem", fontWeight: "bolder" }}>
-              {" "}
-              Messages:{" "}
+            <h3
+              style={{
+                fontSize: "3.6rem",
+                fontWeight: "bolder",
+                textAlign: "center",
+              }}
+            >
+              Messages:
             </h3>
+            <hr style={{ color: "floralwhite", width: "200px" }}></hr>
+
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
         </Col>
-        {/* </Row> */}
       </div>
     </div>
   );

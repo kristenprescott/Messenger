@@ -7,13 +7,17 @@ $mustard: rgba(238, 164, 6, 1);
 @import "~bootstrap/scss/bootstrap";
 
 body {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   background: linear-gradient(
     220deg,
     rgba(7, 71, 154, 0.9) 0%,
     rgba(255, 89, 38, 1) 50%,
     rgba(238, 164, 6, 0.9) 100%
   );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
 }
 
 .App {
@@ -52,8 +56,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  margin: 1rem;
+  // text-align: center;
 }
 
 .Register {
@@ -186,10 +189,10 @@ body {
   height: 15%;
   margin-top: 5%;
   margin: 1rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // text-align: center;
   border: 1px solid floralwhite;
   border-bottom: 1px solid gray;
   border-right: 1px solid darkgray;
