@@ -1,12 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  //   Navbar as NavBar,
-  Nav,
-  // NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Nav, Form, FormControl, Button } from "react-bootstrap";
 
 import transLogo from "../assets/images/logo_transparent.png";
 

@@ -69,7 +69,7 @@ module.exports = {
 
         if (!correctPassword) {
           errors.password = "Password is incorrect.";
-          throw new AuthenticationError("incorrect password", { errors });
+          throw new UserInputError("incorrect password", { errors });
         }
 
         // Issue jwt/send it back:

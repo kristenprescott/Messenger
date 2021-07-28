@@ -31,9 +31,6 @@ export default function Login(props) {
     onCompleted(data) {
       // Store our login token in localStorage in the browser
       localStorage.setItem("token", data.login.token);
-
-      console.log("Login data: ", data.login);
-
       // Redirect to Home after login
       props.history.push("/");
     },
