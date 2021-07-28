@@ -59,6 +59,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  div.usernames {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5rem;
+  }
   div.usernames:nth-child(odd) {
     width: 100%;
     border: 1px solid gainsboro;
@@ -70,6 +75,37 @@ body {
     border: 1px solid gainsboro;
     border-radius: 2px;
     background: gainsboro;
+  }
+  .avatarImg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  .usermessages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 0px 10px;
+  }
+  .Card {
+    width: 50%;
+    height: 82vh;
+    text-align: center;
+    border-radius: 9px;
+    box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.6);
+  }
+  .Left {
+    margin: 0.5rem 0.75rem 0px 1.5rem;
+  }
+  .Right {
+    margin: 0.5rem 1.5rem 0px 0.75rem;
+  }
+  .messagesdata {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 5rem;
+    font-size: 1.8rem;
   }
 }
 

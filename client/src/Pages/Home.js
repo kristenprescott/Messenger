@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { Image, Card } from "react-bootstrap";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 
 import { useAuthDispatch } from "../Context/auth";
 import Navbar from "../Components/Navbar";
@@ -23,8 +24,34 @@ const GET_USERS = gql`
   }
 `;
 
+const GET_MESSAGES = gql`
+  query getMessages($from: String!) {
+    getMessages(from: $from) {
+      uuid
+      from
+      to
+      content
+      createdAt
+    }
+  }
+`;
+
 export default function Home({ history }) {
   const dispatch = useAuthDispatch();
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [
+    getMessages,
+    { loading: messagesLoading, data: messagesData },
+  ] = useLazyQuery(GET_MESSAGES);
+
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages({ variables: { from: selectedUser } });
+    }
+  }, [selectedUser]);
+
+  if (messagesData) console.log("Msg: ", messagesData.getMessages);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -32,13 +59,6 @@ export default function Home({ history }) {
   };
 
   const { loading, data, error } = useQuery(GET_USERS);
-
-  if (error) {
-    console.log("ERROR: ", error);
-  }
-  if (data) {
-    console.log("DATA: ", data);
-  }
 
   let usersMarkup;
   if (!data || loading) {
@@ -50,32 +70,16 @@ export default function Home({ history }) {
       <div
         key={user.username}
         className="usernames"
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          padding: ".5rem",
-        }}
+        onClick={() => setSelectedUser(user.username)}
       >
         <Image
           alt="avatar"
           src={user.imageUrl}
           roundedCircle
-          className="mr-2"
-          style={{
-            width: 50,
-            height: 50,
-            objectFit: "cover",
-          }}
+          className="avatarImg mr-2"
         />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            margin: "0px 0px 0px 10px",
-          }}
-        >
+        <div className="usermessages">
           <p
             className="m-0"
             style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
@@ -97,16 +101,7 @@ export default function Home({ history }) {
       <Navbar logout={logout} />
 
       <div className="Home">
-        <Card
-          style={{
-            width: "50%",
-            height: "82vh",
-            margin: ".5rem 1rem 0px 1.5rem",
-            textAlign: "center",
-            borderRadius: "9px",
-            boxShadow: "5px 5px 6px rgba(0,0,0,0.6)",
-          }}
-        >
+        <Card className="Card Left">
           <h3
             style={{
               fontSize: "3.6rem",
@@ -128,16 +123,7 @@ export default function Home({ history }) {
           </div>
         </Card>
 
-        <Card
-          style={{
-            width: "50%",
-            height: "82vh",
-            margin: ".5rem 1.5rem 0px 1rem",
-            textAlign: "center",
-            borderRadius: "9px",
-            boxShadow: "5px 5px 6px rgba(0,0,0,0.6)",
-          }}
-        >
+        <Card className="Card Right">
           <h3
             style={{
               fontSize: "3.6rem",
@@ -149,11 +135,22 @@ export default function Home({ history }) {
           </h3>
           <hr style={{ color: "darkgray", margin: "2.5rem" }} />
 
-          <div style={{ padding: "1rem 2rem", fontSize: "1.8rem" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          <div className="messagesdata">
+            {messagesData && messagesData.getMessages.length > 0 ? (
+              messagesData.getMessages.map((message) => (
+                <div
+                  key={message.uuid}
+                  style={{ width: "100%", textAlign: "left" }}
+                >
+                  <p>{message.content}</p>
+                  <hr style={{ color: "gray" }} />
+                </div>
+              ))
+            ) : (
+              <div>
+                <p>Messages...</p>
+              </div>
+            )}
           </div>
         </Card>
       </div>
