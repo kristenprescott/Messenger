@@ -8,7 +8,6 @@ import DynamicRoute from "./util/DynamicRoute";
 import "./App.scss";
 
 import Home from "./Pages/Home";
-import Navbar from "./Components/Navbar";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 
@@ -17,14 +16,13 @@ function App() {
     <ApolloProvider>
       <AuthProvider>
         <BrowserRouter>
-          {/* <Container className="App"> */}
-          <Navbar />
-          <Switch>
-            <DynamicRoute exact path="/" component={Home} authenticated />
-            <DynamicRoute path="/register" component={Register} guest />
-            <DynamicRoute path="/login" component={Login} guest />
-          </Switch>
-          {/* </Container> */}
+          <Container className="App">
+            <Switch>
+              <DynamicRoute exact path="/" component={Home} authenticated />
+              <DynamicRoute path="/register" component={Register} guest />
+              <DynamicRoute path="/login" component={Login} guest />
+            </Switch>
+          </Container>
         </BrowserRouter>
       </AuthProvider>
     </ApolloProvider>

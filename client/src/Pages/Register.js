@@ -66,7 +66,7 @@ export default function Register(props) {
           <hr />
 
           {loading ? (
-            <img alt="loading..." src={Loading} width="99%" />
+            <img alt="loading..." src={Loading} width="25%" />
           ) : (
             <Form onSubmit={submitRegistrationForm}>
               <Form.Group className="formGroup">

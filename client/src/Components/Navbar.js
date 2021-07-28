@@ -1,21 +1,9 @@
 import { Link } from "react-router-dom";
 import { Nav, Form, FormControl, Button } from "react-bootstrap";
 
-import { useAuthDispatch } from "../Context/auth";
-
 import transparentLogo from "../assets/images/logo_transparent.png";
 
-export default function Navbar({ history }) {
-  const dispatch = useAuthDispatch();
-
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-
-    // TODO: figure out what's up w this history here
-    // history.push("/");
-    window.open("/", "_self");
-  };
-
+export default function Navbar(props) {
   return (
     <div className="Navbar">
       <Nav fill defaultActiveKey="/" className="Nav">
@@ -37,6 +25,7 @@ export default function Navbar({ history }) {
           </div>
         </Nav.Item>
 
+        {/* {user ? ( */}
         <Nav.Item className="NavItem">
           <div className="nav-link">
             <Link to="/login">
@@ -44,14 +33,15 @@ export default function Navbar({ history }) {
             </Link>
           </div>
         </Nav.Item>
-
+        {/* ) : ( */}
         <Nav.Item className="NavItem">
-          <div className="nav-link" onClick={logout}>
+          <div className="nav-link" onClick={props.logout}>
             <Link to="/">
               <h3 style={{ cursor: "pointer" }}>Logout</h3>
             </Link>
           </div>
         </Nav.Item>
+        {/* )} */}
 
         <Nav.Item className="NavItem">
           <div className="nav-link">

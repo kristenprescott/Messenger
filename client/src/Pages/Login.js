@@ -36,7 +36,7 @@ export default function Login(props) {
       dispatch({ type: "LOGIN", payload: data.login });
       // // Redirect to Home after login
       // props.history.push("/");
-      console.log("LOGIN DATA: ", data.login);
+      // console.log("LOGIN DATA: ", data.login);
     },
   });
 
@@ -61,7 +61,7 @@ export default function Login(props) {
           <hr />
 
           {loading ? (
-            <img alt="loading..." src={Loading} width="99%" />
+            <img alt="loading..." src={Loading} width="25%" />
           ) : (
             <Form onSubmit={submitLoginForm}>
               <Form.Group className="formGroup">
