@@ -1,30 +1,17 @@
 const bcrypt = require("bcryptjs");
 const { UserInputError, AuthenticationError } = require("apollo-server");
 const jwt = require("jsonwebtoken");
-// https://sequelize.org/master/manual/model-querying-basics.html#operators
 const { Op } = require("sequelize");
 
-const { User } = require("../models");
+const { Message, User } = require("../models");
 const { JWT_SECRET } = require("../config/env.json");
 
 module.exports = {
   Query: {
-    getUsers: async (_, __, context) => {
+    getUsers: async (_, __, { user }) => {
       try {
         // Authorization:
-        let user;
-        // Check for auth header:
-        if (context.req && context.req.headers.authorization) {
-          // Remove 'Bearer ' from header:
-          const token = context.req.headers.authorization.split("Bearer ")[1];
-          jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
-            // Check for errors:
-            if (err) {
-              throw new AuthenticationError("Unauthenticated.");
-            }
-            user = decodedToken;
-          });
-        }
+        if (!user) throw new AuthenticationError("Unauthenticated");
 
         const users = await User.findAll({
           // Get all users EXCEPT currently authenticated user:
@@ -33,7 +20,6 @@ module.exports = {
 
         return users;
       } catch (err) {
-        // console.log("Server getUsers error: ", err);
         throw err;
       }
     },
@@ -83,7 +69,6 @@ module.exports = {
           token,
         };
       } catch (err) {
-        // console.log("Server login error: ", err);
         throw err;
       }
     },
@@ -114,18 +99,6 @@ module.exports = {
           errors.confirmPassword = "Passwords must match.";
         }
 
-        // // Check if username / email exists
-        // const userByUsername = await User.findOne({ where: { username } });
-        // const userByEmail = await User.findOne({ where: { email } });
-
-        // if (userByUsername) {
-        //   errors.username = "This username is taken.";
-        // }
-        // if (userByEmail) {
-        //   errors.email =
-        //     "There is already an account using that email address.";
-        // }
-
         // If the errors object is not empty, throw errors
         if (Object.keys(errors).length > 0) {
           throw errors;
@@ -143,7 +116,6 @@ module.exports = {
 
         return user;
       } catch (err) {
-        // console.log("Server registration error: ", err);
         // Check for username/email uniqueness:
         if (err.name === "SequelizeUniqueConstraintError") {
           err.errors.forEach(
@@ -154,6 +126,38 @@ module.exports = {
           err.errors.forEach((e) => (errors[e.path] = e.message));
         }
         throw new UserInputError("Bad input: ", { errors });
+      }
+    },
+    sendMessage: async (parent, { to, content }, { user }) => {
+      try {
+        // Make sure user is authenticated:
+        if (!user) throw new AuthenticationError("Unauthenticated");
+
+        const recipient = await User.findOne({ where: { username: to } });
+
+        if (!recipient) {
+          throw new UseerInputError("User not found.");
+        } else if (recipient.username === user.username) {
+          throw new UserInputError("You can't message yourself.");
+        }
+
+        // Validate content:
+        if (content.trim() === "") {
+          throw new UseerInputError("Empty message.");
+        }
+
+        // Send message to recipient:
+
+        const message = await Message.create({
+          from: user.username,
+          to,
+          content,
+        });
+
+        return message;
+      } catch (err) {
+        console.log(err);
+        throw err;
       }
     },
   },
@@ -248,6 +252,27 @@ RES:
   }
 }
 ____________________________________________________
-
+mutation sendMessage{
+  sendMessage(to: "JMack" content:"eyooooo what up Jay!" ){
+    uuid
+    from
+    to
+    content
+    createdAt
+  }
+}
+RES:
+{
+  "data": {
+    "sendMessage": {
+      "uuid": "0dc8aaaa-f29f-4c77-99fb-088e1be1c0af",
+      "from": "aello",
+      "to": "JMack",
+      "content": "eyooooo what up Jay!",
+      "createdAt": "1627437424066"
+    }
+  }
+}
+____________________________________________________
 
 */
