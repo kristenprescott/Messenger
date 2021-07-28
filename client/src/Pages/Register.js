@@ -37,10 +37,10 @@ export default function Register() {
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, res) {
-      console.log("client registerUser res: ", res);
+      // console.log("client registerUser res: ", res);
     },
     onError(err) {
-      console.log("client ERROR: ", err.graphQLErrors[0].extensions.errors);
+      // console.log("client ERROR: ", err.graphQLErrors[0].extensions.errors);
 
       setErrors(err.graphQLErrors[0].extensions.errors);
     },
@@ -49,7 +49,7 @@ export default function Register() {
   const submitRegistrationForm = (e) => {
     e.preventDefault();
 
-    console.log("client Registration data: ", variables);
+    // console.log("client Registration data: ", variables);
 
     registerUser({ variables });
 
@@ -64,7 +64,7 @@ export default function Register() {
 
   return (
     <Row className="Register">
-      <Col className="" sm={11} md={10} lg={9}>
+      <Col className="Column" sm={11} md={10} lg={9}>
         <Card className="card">
           <h1 className="text-center ">Register</h1>
 

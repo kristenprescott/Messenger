@@ -33,7 +33,7 @@ module.exports = {
 
         return users;
       } catch (err) {
-        console.log("Server getUsers error: ", err);
+        // console.log("Server getUsers error: ", err);
         throw err;
       }
     },
@@ -83,7 +83,7 @@ module.exports = {
           token,
         };
       } catch (err) {
-        console.log("Server login error: ", err);
+        // console.log("Server login error: ", err);
         throw err;
       }
     },
@@ -143,7 +143,7 @@ module.exports = {
 
         return user;
       } catch (err) {
-        console.log("Server registration error: ", err);
+        // console.log("Server registration error: ", err);
         // Check for username/email uniqueness:
         if (err.name === "SequelizeUniqueConstraintError") {
           err.errors.forEach(

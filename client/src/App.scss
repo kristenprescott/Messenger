@@ -7,6 +7,7 @@ $mustard: rgba(238, 164, 6, 1);
 @import "~bootstrap/scss/bootstrap";
 
 body {
+  height: 100vh;
   background: linear-gradient(
     220deg,
     rgba(7, 71, 154, 0.9) 0%,
@@ -16,7 +17,12 @@ body {
 }
 
 .App {
-  margin-top: 15%;
+  // margin-top: 15%;
+}
+
+.container {
+  margin: 0px;
+  padding: 0px;
 }
 
 .btn {
@@ -27,7 +33,7 @@ body {
   font-size: 1.5rem;
   font-weight: bolder;
   text-transform: uppercase;
-  padding: 2.5rem 0px;
+  padding: 2rem 0px;
   border-radius: 4px;
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.75);
 }
@@ -40,10 +46,117 @@ body {
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
+.Navbar {
+  overflow: auto;
+
+  width: 99vw;
+  margin-top: 5%;
+  margin: 1rem;
+  // padding: 0.7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid floralwhite;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid darkgray;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.13);
+
+  .Nav {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    // border: 5px solid red;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      // border: 1px solid gainsboro;
+    }
+    a:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 9px;
+      // text-transform: uppercase;
+      padding: 0.5rem 1rem;
+    }
+  }
+  h3 {
+    font-size: 3.4rem;
+    font-weight: 700;
+  }
+  .Searchbar {
+    // margin: 0px 0.1rem;
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    .search {
+      outline: none;
+      border: 1px solid gainsboro;
+      border-radius: 6px;
+      height: 5vmin;
+
+      float: right;
+      padding: 1%;
+      padding-left: 1rem;
+      // margin-right: 16px;
+      font-size: 17px;
+
+      width: 25vmin;
+    }
+    .search:hover {
+      border: 1px solid darkgray;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+    .search:focus {
+      border: 1px solid dimgray;
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75);
+    }
+    .search-btn {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      height: calc(1rem +);
+      width: 75px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+  }
+}
+
+.Home {
+  margin: 0px 5rem;
+  margin-top: 2.5%;
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid floralwhite;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid darkgray;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.13);
+  h1 {
+    font-size: 6.2rem;
+    font-weight: 900;
+  }
+}
+
 .Register {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5%;
+  .Column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      max-width: 50rem;
+    }
+  }
   .card {
     background-color: floralwhite;
     border: 1px solid gainsboro;
@@ -85,3 +198,37 @@ body {
   background-color: rgba(255, 89, 38, 1);
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
+
+.Login {
+  margin: 0px 10rem;
+  margin-top: 5%;
+  padding: 5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid floralwhite;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid darkgray;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.13);
+  h1 {
+    font-size: 6.2rem;
+    font-weight: 900;
+  }
+}
+
+/* ===========================
+   ====== Medua Query for Search Box ====== 
+   =========================== */
+
+// @media only screen and (min-width: 150px) and (max-width: 780px) {
+//   .Navbar {
+//     width: 95%;
+//     margin: 0 auto;
+//     .Nav {
+//       width: 95%;
+//       margin: 0 auto;
+//     }
+//   }
+// }
