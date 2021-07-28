@@ -69,6 +69,7 @@ export default function Login(props) {
                   {errors.username ?? "Username "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="text"
                   value={variables.username}
                   onChange={(e) =>
@@ -83,6 +84,7 @@ export default function Login(props) {
                   {errors.password ?? "Password "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="password"
                   value={variables.password}
                   onChange={(e) =>

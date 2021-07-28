@@ -74,6 +74,7 @@ export default function Register(props) {
                   {errors.username ?? "Username "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="text"
                   value={variables.username}
                   onChange={(e) =>
@@ -88,6 +89,7 @@ export default function Register(props) {
                   {errors.email ?? "Email "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="email"
                   value={variables.email}
                   onChange={(e) =>
@@ -102,6 +104,7 @@ export default function Register(props) {
                   {errors.password ?? "Password "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="password"
                   value={variables.password}
                   onChange={(e) =>
@@ -116,6 +119,7 @@ export default function Register(props) {
                   {errors.confirmPassword ?? "Confirm password "}
                 </Form.Label>
                 <Form.Control
+                  autoComplete="new-password"
                   type="password"
                   value={variables.confirmPassword}
                   onChange={(e) =>
